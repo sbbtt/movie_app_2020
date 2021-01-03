@@ -1,48 +1,49 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
+class App extends React.Component {
+  state={
+    count: 0,
+  };
 
-function Food({name, picture, rating}){
-  return( 
-  <div>
-  <h2>I like {name}  </h2>
-  <h4>{rating}/5.0</h4>
-        <img src={picture} alt={name}/>
-  </div>
-  );
+  constructor(props){
+    super(props);
+    console.log('hello');
+  }
+
+  add = () => {
+    this.setState(current => ({
+      count: current.count +1 
+    }));
+  };
+  
+  minus = () => {
+    this.setState(current=>({
+      count: current.count -1 
+    }));
+  };
+
+componentDidMount(){
+  console.log('component rendered');
 }
 
-const foodLike = [
-  {
-    id: 1,
-    name: 'Kimchi사진왜안나오긔',
-    image: 'http://08food.com/web/product/big/201801/33_shop1_243196.jpg',
-    rating: 2,
-  },
-  { 
-    id: 2,
-    name: '6gaejang',
-    image: 'https://t1.daumcdn.net/cfile/tistory/99BB91465F87F20639',
-    rating: 5,
-  },
-  { 
-    id: 3,
-    name: '매운맛을 보여주는 새우깡',
-    image: 'https://img.etoday.co.kr/pto_db/2018/08/600/20180803103453_1236701_1200_550.jpg',
-    rating: 3,
-  },
-];
+componentDidUpdate(){
+  console.log('I just updated')
+}
 
-function App() {
-  return (
-    <div>
-      <h1>{foodLike.map(inja => (
-        <Food name = {inja.name} picture={inja.image} key={inja.id} rating={inja.rating}/>
-      ))} </h1>
-      
-    </div>
-    
-  );
+componentWillUnmount(){
+  console.log('Goodbye, cruel world!')
+}
+
+  render(){
+    console.log("I'm rendering");
+    return(
+      <div>
+        <h1>The number is: {this.state.count}</h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>Minus</button>
+      </div>
+    );
+  }
 }
 
 export default App;
